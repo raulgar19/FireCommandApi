@@ -1,9 +1,9 @@
-﻿using FireCommand.Models;
-using FireCommand.Repositories.Interfaces;
-using FireCommandApi.Data;
+﻿using FireCommandApi.Data;
+using FireCommandApi.Models;
+using FireCommandApi.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace FireCommand.Repositories
+namespace FireCommandApi.Repositories
 {
 
     public class EquipmentRepository : IEquipmentRepository
@@ -18,6 +18,11 @@ namespace FireCommand.Repositories
         public async Task<List<Equipment>> GetEquipmentsAsync()
         {
             return await this.context.Equipment.ToListAsync();
+        }
+
+        public async Task<Equipment> FindEquipmentAsync(int id)
+        {
+            return await this.context.Equipment.FindAsync(id);
         }
 
         public async Task<List<EquipmentCondition>> GetEquipmentConditionsAsync()
@@ -55,7 +60,7 @@ namespace FireCommand.Repositories
         public async Task DeleteEquipmentAsync(Equipment equipment)
         {
             this.context.Equipment.Remove(equipment);
-            await context.SaveChangesAsync();
+            await this.context.SaveChangesAsync();
         }
     }
 }

@@ -1,6 +1,5 @@
-﻿using FireCommand.Models;
-using FireCommand.Models.ViewModels;
-using FireCommand.Repositories.Interfaces;
+﻿using FireCommandApi.Models.ViewModels;
+using FireCommandApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FireCommandApi.Controllers
@@ -9,25 +8,17 @@ namespace FireCommandApi.Controllers
     [ApiController]
     public class AnalysisController : ControllerBase
     {
-        private IIncidentRepository incidentRepository;
+        private readonly IIncidentService incidentService;
 
-        public AnalysisController(IIncidentRepository incidentRepository)
+        public AnalysisController(IIncidentService incidentService)
         {
-            this.incidentRepository = incidentRepository;
+            this.incidentService = incidentService;
         }
 
         [HttpGet]
         public async Task<ActionResult<AnalysisViewModel>> GetAnalysis()
         {
-            List<Incident> incidents = await incidentRepository.GetIncidentsAsync();
-            List<IncidentType> incidentTypes = await incidentRepository.GetIncidentTypesAsync();
-
-            AnalysisViewModel viewModel = new AnalysisViewModel
-            {
-                Incidents = incidents,
-                IncidentTypes = incidentTypes
-            };
-
+            AnalysisViewModel viewModel = await this.incidentService.GetAnalysisAsync();
             return viewModel;
         }
     }

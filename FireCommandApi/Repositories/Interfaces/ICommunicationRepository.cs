@@ -1,6 +1,6 @@
-﻿using FireCommand.Models;
+﻿using FireCommandApi.Models;
 
-namespace FireCommand.Repositories.Interfaces
+namespace FireCommandApi.Repositories.Interfaces
 {
     public interface ICommunicationRepository
     {

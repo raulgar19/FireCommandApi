@@ -1,4 +1,6 @@
-﻿namespace FireCommand.Models.ViewModels
+﻿using FireCommandApi.Models;
+
+namespace FireCommandApi.Models.ViewModels
 {
     public class DashboardViewModel
     {

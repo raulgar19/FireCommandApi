@@ -1,4 +1,4 @@
-﻿using FireCommand.Models;
+﻿using FireCommandApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FireCommandApi.Data

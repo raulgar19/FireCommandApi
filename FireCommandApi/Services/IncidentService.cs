@@ -1,0 +1,80 @@
+using FireCommandApi.Models;
+using FireCommandApi.Models.ViewModels;
+using FireCommandApi.Repositories.Interfaces;
+using FireCommandApi.Services.Interfaces;
+
+namespace FireCommandApi.Services
+{
+    public class IncidentService : IIncidentService
+    {
+        private readonly IIncidentRepository incidentRepository;
+
+        public IncidentService(IIncidentRepository incidentRepository)
+        {
+            this.incidentRepository = incidentRepository;
+        }
+
+        public async Task<IncidentViewModel> GetIncidentOverviewAsync()
+        {
+            List<Incident> incidents = await this.incidentRepository.GetIncidentsAsync();
+            List<IncidentType> incidentTypes = await this.incidentRepository.GetIncidentTypesAsync();
+            List<Priority> priorities = await this.incidentRepository.GetPrioritiesAsync();
+
+            return new IncidentViewModel
+            {
+                Incidents = incidents,
+                IncidentTypes = incidentTypes,
+                Priorities = priorities
+            };
+        }
+
+        public async Task<AnalysisViewModel> GetAnalysisAsync()
+        {
+            List<Incident> incidents = await this.incidentRepository.GetIncidentsAsync();
+            List<IncidentType> incidentTypes = await this.incidentRepository.GetIncidentTypesAsync();
+
+            return new AnalysisViewModel
+            {
+                Incidents = incidents,
+                IncidentTypes = incidentTypes
+            };
+        }
+
+        public Task<List<Incident>> GetIncidentsAsync()
+        {
+            return this.incidentRepository.GetIncidentsAsync();
+        }
+
+        public Task<List<Priority>> GetPrioritiesAsync()
+        {
+            return this.incidentRepository.GetPrioritiesAsync();
+        }
+
+        public Task<List<IncidentType>> GetIncidentTypesAsync()
+        {
+            return this.incidentRepository.GetIncidentTypesAsync();
+        }
+
+        public Task AddIncidentAsync(Incident incident)
+        {
+            return this.incidentRepository.AddIncidentAsync(incident);
+        }
+
+        public Task UpdateIncidentAsync(Incident incident)
+        {
+            return this.incidentRepository.UpdateIncidentAsync(incident);
+        }
+
+        public async Task DeleteIncidentAsync(int id)
+        {
+            Incident incident = await this.incidentRepository.FindIncidentAsync(id);
+
+            if (incident == null)
+            {
+                return;
+            }
+
+            await this.incidentRepository.DeleteIncidentAsync(incident);
+        }
+    }
+}

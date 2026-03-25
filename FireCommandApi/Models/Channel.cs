@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FireCommand.Models
+namespace FireCommandApi.Models
 {
     [Table("Channels")]
     public class Channel
     {
         [Key]
-        [Column("Id")] 
+        [Column("Id")]
         public int Id { get; set; }
 
-        [Column("Name")] 
+        [Column("Name")]
         public string Name { get; set; }
     }
 }

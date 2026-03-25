@@ -1,10 +1,11 @@
-﻿using FireCommand.Models;
+﻿using FireCommandApi.Models;
 
-namespace FireCommand.Repositories.Interfaces
+namespace FireCommandApi.Repositories.Interfaces
 {
     public interface IPersonnelRepository
     {
         Task<List<Personnel>> GetPersonnelAsync();
+        Task<Personnel> FindPersonnelAsync(int id);
         Task<List<Rank>> GetRanksAsync();
         Task<List<Specialization>> GetSpecializationsAsync();
         Task<List<Station>> GetStationsAsync();

@@ -1,13 +1,14 @@
-﻿using FireCommand.Models;
+﻿using FireCommandApi.Models;
 
-namespace FireCommand.Repositories.Interfaces
+namespace FireCommandApi.Repositories.Interfaces
 {
     public interface IRiskZoneRepository
     {
         Task<List<RiskZone>> GetRiskZonesAsync();
+        Task<RiskZone> FindRiskZoneAsync(int id);
         Task<List<RiskType>> GetRiskTypesAsync();
         Task<List<Station>> GetStationsAsync();
         Task AddRiskZoneAsync(RiskZone riskZone);
-        Task DeleteRiskZoneAsync(int id);
+        Task DeleteRiskZoneAsync(RiskZone riskZone);
     }
 }

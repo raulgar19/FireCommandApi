@@ -1,9 +1,9 @@
-﻿using FireCommand.Models;
-using FireCommand.Repositories.Interfaces;
-using FireCommandApi.Data;
+﻿using FireCommandApi.Data;
+using FireCommandApi.Models;
+using FireCommandApi.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace FireCommand.Repositories
+namespace FireCommandApi.Repositories
 {
     public class PersonnelRepository : IPersonnelRepository
     {
@@ -17,6 +17,11 @@ namespace FireCommand.Repositories
         public async Task<List<Personnel>> GetPersonnelAsync()
         {
             return await this.context.Personnel.ToListAsync();
+        }
+
+        public async Task<Personnel> FindPersonnelAsync(int id)
+        {
+            return await this.context.Personnel.FindAsync(id);
         }
 
         public async Task<List<Rank>> GetRanksAsync()

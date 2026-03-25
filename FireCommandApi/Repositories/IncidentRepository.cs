@@ -1,9 +1,9 @@
-﻿using FireCommand.Models;
-using FireCommand.Repositories.Interfaces;
+﻿using FireCommandApi.Models;
+using FireCommandApi.Repositories.Interfaces;
 using FireCommandApi.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace FireCommand.Repositories
+namespace FireCommandApi.Repositories
 {
     public class IncidentRepository : IIncidentRepository
     {
@@ -29,11 +29,6 @@ namespace FireCommand.Repositories
             return await this.context.IncidentTypes.ToListAsync();
         }
 
-        public async Task<Incident> GetIncidentByIdAsync(int id)
-        {
-            return await this.context.Incidents.FindAsync(id);
-        }
-
         public async Task AddIncidentAsync(Incident incident)
         {
             this.context.Incidents.Add(incident);
@@ -46,10 +41,13 @@ namespace FireCommand.Repositories
             await this.context.SaveChangesAsync();
         }
 
-        public async Task DeleteIncidentAsync(int id)
+        public async Task<Incident> FindIncidentAsync(int id)
         {
-            Incident incident = await this.GetIncidentByIdAsync(id);
+            return await this.context.Incidents.FindAsync(id);
+        }
 
+        public async Task DeleteIncidentAsync(Incident incident)
+        {
             this.context.Incidents.Remove(incident);
             await this.context.SaveChangesAsync();
         }

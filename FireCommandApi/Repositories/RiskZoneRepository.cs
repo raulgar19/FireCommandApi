@@ -1,9 +1,9 @@
-﻿using FireCommand.Models;
-using FireCommand.Repositories.Interfaces;
-using FireCommandApi.Data;
+﻿using FireCommandApi.Data;
+using FireCommandApi.Models;
+using FireCommandApi.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace FireCommand.Repositories
+namespace FireCommandApi.Repositories
 {
     public class RiskZoneRepository : IRiskZoneRepository
     {
@@ -17,6 +17,11 @@ namespace FireCommand.Repositories
         public async Task<List<RiskZone>> GetRiskZonesAsync()
         {
             return await this.context.RiskZones.ToListAsync();
+        }
+
+        public async Task<RiskZone> FindRiskZoneAsync(int id)
+        {
+            return await this.context.RiskZones.FindAsync(id);
         }
 
         public async Task<List<RiskType>> GetRiskTypesAsync()
@@ -35,14 +40,10 @@ namespace FireCommand.Repositories
             await this.context.SaveChangesAsync();
         }
 
-        public async Task DeleteRiskZoneAsync(int id)
+        public async Task DeleteRiskZoneAsync(RiskZone riskZone)
         {
-            var zone = await this.context.RiskZones.FindAsync(id);
-            if (zone != null)
-            {
-                this.context.RiskZones.Remove(zone);
-                await this.context.SaveChangesAsync();
-            }
+            this.context.RiskZones.Remove(riskZone);
+            await this.context.SaveChangesAsync();
         }
     }
 }

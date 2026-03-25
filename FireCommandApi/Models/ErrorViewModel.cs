@@ -1,4 +1,4 @@
-namespace FireCommand.Models
+namespace FireCommandApi.Models
 {
     public class ErrorViewModel
     {

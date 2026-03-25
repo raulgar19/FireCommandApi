@@ -1,10 +1,11 @@
-﻿using FireCommand.Models;
+﻿using FireCommandApi.Models;
 
-namespace FireCommand.Repositories.Interfaces
+namespace FireCommandApi.Repositories.Interfaces
 {
     public interface IEquipmentRepository
     {
         Task<List<Equipment>> GetEquipmentsAsync();
+        Task<Equipment> FindEquipmentAsync(int id);
         Task<List<EquipmentCondition>> GetEquipmentConditionsAsync();
         Task<List<EquipmentStatus>> GetEquipmentStatusesAsync();
         Task<List<EquipmentType>> GetEquipmentTypesAsync();

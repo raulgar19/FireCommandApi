@@ -1,6 +1,6 @@
-﻿using FireCommand.Models;
-using FireCommand.Models.ViewModels;
-using FireCommand.Repositories.Interfaces;
+﻿using FireCommandApi.Models;
+using FireCommandApi.Models.ViewModels;
+using FireCommandApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FireCommandApi.Controllers
@@ -9,48 +9,38 @@ namespace FireCommandApi.Controllers
     [ApiController]
     public class IncidentsController : ControllerBase
     {
-        private IIncidentRepository incidentRepository;
+        private readonly IIncidentService incidentService;
 
-        public IncidentsController(IIncidentRepository repository)
+        public IncidentsController(IIncidentService incidentService)
         {
-            this.incidentRepository = repository;
+            this.incidentService = incidentService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IncidentViewModel>> GetIncidents()
         {
-            List<Incident> incidents = await this.incidentRepository.GetIncidentsAsync();
-            List<IncidentType> incidentTypes = await this.incidentRepository.GetIncidentTypesAsync();
-            List<Priority> priorities = await this.incidentRepository.GetPrioritiesAsync();
-
-            IncidentViewModel viewModel = new IncidentViewModel
-            {
-                Incidents = incidents,
-                IncidentTypes = incidentTypes,
-                Priorities = priorities
-            };
-
+            IncidentViewModel viewModel = await this.incidentService.GetIncidentOverviewAsync();
             return viewModel;
         }
 
         [HttpPost]
         public async Task<ActionResult> CreateIncident(Incident incident)
         {
-            await this.incidentRepository.AddIncidentAsync(incident);
+            await this.incidentService.AddIncidentAsync(incident);
             return Ok();
         }
 
         [HttpPut]
         public async Task<ActionResult> UpdateIncident(Incident incident)
         {
-            await this.incidentRepository.UpdateIncidentAsync(incident);
+            await this.incidentService.UpdateIncidentAsync(incident);
             return Ok();
         }
 
         [HttpDelete]
         public async Task<ActionResult> DeleteIncident(int id)
         {
-            await this.incidentRepository.DeleteIncidentAsync(id);
+            await this.incidentService.DeleteIncidentAsync(id);
             return Ok();
         }
     }
