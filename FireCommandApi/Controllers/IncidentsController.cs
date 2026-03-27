@@ -1,5 +1,5 @@
-﻿using FireCommandApi.Models;
-using FireCommandApi.Models.ViewModels;
+﻿using FireCommandModels.Models;
+using FireCommandModels.Models.ViewModels;
 using FireCommandApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

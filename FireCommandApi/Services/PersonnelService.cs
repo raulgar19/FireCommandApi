@@ -1,4 +1,4 @@
-using FireCommandApi.Models;
+using FireCommandModels.Models;
 using FireCommandApi.Repositories.Interfaces;
 using FireCommandApi.Services.Interfaces;
 

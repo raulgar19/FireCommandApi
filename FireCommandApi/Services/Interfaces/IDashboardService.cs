@@ -1,4 +1,4 @@
-using FireCommandApi.Models.ViewModels;
+using FireCommandModels.Models.ViewModels;
 
 namespace FireCommandApi.Services.Interfaces
 {

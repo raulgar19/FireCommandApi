@@ -1,4 +1,4 @@
-﻿using FireCommandApi.Models;
+﻿using FireCommandModels.Models;
 using FireCommandApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

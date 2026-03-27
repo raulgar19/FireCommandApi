@@ -1,5 +1,5 @@
 ﻿using FireCommandApi.Data;
-using FireCommandApi.Models;
+using FireCommandModels.Models;
 using FireCommandApi.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
