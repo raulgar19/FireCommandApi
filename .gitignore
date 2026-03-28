@@ -361,3 +361,14 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# App settings
+appsettings.json
+appsettings.*.json
+
+# Database scripts
+*.sql
+Database/*.sql
+
+# Telegram docs
+telegram.config.md

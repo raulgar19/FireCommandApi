@@ -1,6 +1,6 @@
-﻿using FireCommandModels.Models;
-using FireCommandApi.Repositories.Interfaces;
-using FireCommandApi.Data;
+﻿using FireCommandApi.Data;
+using FireCommandModels.Models;
+using FireCommandModels.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace FireCommandApi.Repositories

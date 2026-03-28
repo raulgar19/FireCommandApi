@@ -1,7 +1,7 @@
-using FireCommandApi.Repositories.Interfaces;
 using FireCommandApi.Services.Interfaces;
 using FireCommandModels.Models;
 using FireCommandModels.Models.ViewModels;
+using FireCommandModels.Repositories.Interfaces;
 
 namespace FireCommandApi.Services
 {

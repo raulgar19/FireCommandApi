@@ -1,9 +1,8 @@
-using FireCommandApi.Repositories;
-using FireCommandApi.Repositories.Interfaces;
-using FireCommandApi.Services;
-using FireCommandApi.Services.Interfaces;
 using FireCommandApi.Data;
 using FireCommandApi.Repositories;
+using FireCommandApi.Services;
+using FireCommandApi.Services.Interfaces;
+using FireCommandModels.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
