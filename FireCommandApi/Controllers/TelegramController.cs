@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FireCommandModels.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FireCommandApi.Controllers
 {
@@ -6,24 +7,16 @@ namespace FireCommandApi.Controllers
     [ApiController]
     public class TelegramController : ControllerBase
     {
-        private IConfiguration configuration;
+        private readonly ITelegramService telegramService;
 
-        public TelegramController(IConfiguration configuration)
+        public TelegramController(ITelegramService telegramService)
         {
-            this.configuration = configuration;
+            this.telegramService = telegramService;
         }
 
         [HttpPost]
-        public async Task<ActionResult> SendTelegramMessage(bool activar)
+        public async Task<ActionResult> SendTelegramMessage([FromQuery] bool activar)
         {
-            string botToken = this.configuration["TelegramBot:Token"];
-            string chatId = this.configuration["TelegramBot:ChatId"];
-
-            if (string.IsNullOrEmpty(botToken) || string.IsNullOrEmpty(chatId))
-            {
-                return BadRequest("Credenciales incorrectas");
-            }
-
             string mensaje;
 
             if (activar)
@@ -52,21 +45,16 @@ namespace FireCommandApi.Controllers
                           "Agradecemos la estricta colaboración ciudadana durante el despliegue operativo. Fin de la transmisión.";
             }
 
-            string url = $"https://api.telegram.org/bot{botToken}/sendMessage?chat_id={chatId}&text={System.Uri.EscapeDataString(mensaje)}&parse_mode=Markdown";
-
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
-                    await client.GetAsync(url);
-                }
+                await this.telegramService.SendTelegramMessageAsync(mensaje);
+
                 return Ok();
             }
             catch
             {
                 return BadRequest("Error al enviar el mensaje");
             }
-
         }
     }
 }

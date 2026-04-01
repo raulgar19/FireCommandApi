@@ -1,5 +1,6 @@
 ﻿using FireCommandModels.Models;
-using FireCommandApi.Services.Interfaces;
+using FireCommandModels.Models.ViewModels;
+using FireCommandModels.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FireCommandApi.Controllers
@@ -16,10 +17,11 @@ namespace FireCommandApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetRiskzones()
+        public async Task<ActionResult<RiskZoneViewModel>> GetRiskZonesInfoAsync()
         {
-            var riskzones = await this.riskZoneService.GetRiskZonesAsync();
-            return Ok(riskzones);
+            RiskZoneViewModel viewModel = await this.riskZoneService.GetRiskZonesInfoAsync();
+
+            return viewModel;
         }
 
         [HttpPost]
@@ -39,6 +41,7 @@ namespace FireCommandApi.Controllers
         public async Task<ActionResult> DeleteRiskzones(int id)
         {
             await this.riskZoneService.DeleteRiskZoneAsync(id);
+
             return Ok();
         }
     }

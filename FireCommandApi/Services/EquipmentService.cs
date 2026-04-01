@@ -1,7 +1,7 @@
-using FireCommandApi.Services.Interfaces;
 using FireCommandModels.Models;
 using FireCommandModels.Models.ViewModels;
 using FireCommandModels.Repositories.Interfaces;
+using FireCommandModels.Services.Interfaces;
 
 namespace FireCommandApi.Services
 {
@@ -14,7 +14,7 @@ namespace FireCommandApi.Services
             this.equipmentRepository = equipmentRepository;
         }
 
-        public async Task<EquipmentViewModel> GetEquipmentOverviewAsync()
+        public async Task<EquipmentViewModel> GetEquipmentInfoAsync()
         {
             List<Equipment> equipments = await this.equipmentRepository.GetEquipmentsAsync();
             List<EquipmentType> equipmentTypes = await this.equipmentRepository.GetEquipmentTypesAsync();

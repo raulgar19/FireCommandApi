@@ -216,15 +216,21 @@ namespace FireCommandApi.Controllers
         }
 
         /* ── TAG GROUP ── */
-        .tag-group { margin-bottom: 0; break-inside: avoid; }
+        .tag-group { margin-bottom: 0; }
 
         /* ── TWO-COLUMN GRID ── */
         #endpoints-container {
-            columns: 2;
-            column-gap: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 1.5rem;
+            align-items: start;
         }
 
-
+        #col-left, #col-right {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
 
         .tag-header {
             display: flex; align-items: center; gap: .75rem;
@@ -833,7 +839,13 @@ namespace FireCommandApi.Controllers
                 return;
             }
 
+            /* create two stable columns */
+            container.innerHTML = '<div id=""col-left""></div><div id=""col-right""></div>';
+            const colLeft  = document.getElementById('col-left');
+            const colRight = document.getElementById('col-right');
+
             let cardIndex = 0;
+            let groupIndex = 0;
             Object.entries(groups).forEach(([tag, ops]) => {
                 /* sidebar section */
                 const sTitle = document.createElement('div');
@@ -867,7 +879,9 @@ namespace FireCommandApi.Controllers
                     sidebarLinks.appendChild(link);
                 });
 
-                container.appendChild(section);
+                /* distribute groups alternately between columns */
+                (groupIndex % 2 === 0 ? colLeft : colRight).appendChild(section);
+                groupIndex++;
             });
         })
         .catch(err => {

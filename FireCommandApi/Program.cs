@@ -1,8 +1,8 @@
 using FireCommandApi.Data;
 using FireCommandApi.Repositories;
 using FireCommandApi.Services;
-using FireCommandApi.Services.Interfaces;
 using FireCommandModels.Repositories.Interfaces;
+using FireCommandModels.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +21,7 @@ builder.Services.AddTransient<IPersonnelService, PersonnelService>();
 builder.Services.AddTransient<IRiskZoneService, RiskZoneService>();
 builder.Services.AddTransient<ICommunicationService, CommunicationService>();
 builder.Services.AddTransient<IDashboardService, DashboardService>();
+builder.Services.AddTransient<ITelegramService, TelegramService>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FireCommand")));

@@ -1,5 +1,6 @@
 ﻿using FireCommandModels.Models;
-using FireCommandApi.Services.Interfaces;
+using FireCommandModels.Models.ViewModels;
+using FireCommandModels.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FireCommandApi.Controllers
@@ -16,9 +17,9 @@ namespace FireCommandApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Personnel>>> GetPersonnel()
+        public async Task<ActionResult<PersonnelViewModel>> GetPersonnelInfoAsync()
         {
-            List<Personnel> personnel = await this.personnelService.GetPersonnelAsync();
+            PersonnelViewModel personnel = await this.personnelService.GetPersonnelInfoAsync();
 
             return personnel;
         }

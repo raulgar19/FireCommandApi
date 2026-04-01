@@ -1,7 +1,7 @@
-using FireCommandApi.Services.Interfaces;
 using FireCommandModels.Models;
 using FireCommandModels.Models.ViewModels;
 using FireCommandModels.Repositories.Interfaces;
+using FireCommandModels.Services.Interfaces;
 
 namespace FireCommandApi.Services
 {
@@ -14,7 +14,7 @@ namespace FireCommandApi.Services
             this.incidentRepository = incidentRepository;
         }
 
-        public async Task<IncidentViewModel> GetIncidentOverviewAsync()
+        public async Task<IncidentViewModel> GetIncidentsInfoAsync()
         {
             List<Incident> incidents = await this.incidentRepository.GetIncidentsAsync();
             List<IncidentType> incidentTypes = await this.incidentRepository.GetIncidentTypesAsync();
@@ -75,6 +75,11 @@ namespace FireCommandApi.Services
             }
 
             await this.incidentRepository.DeleteIncidentAsync(incident);
+        }
+
+        public Task<IncidentViewModel> GetIncidentAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

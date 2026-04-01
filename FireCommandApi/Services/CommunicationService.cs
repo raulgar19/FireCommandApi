@@ -1,7 +1,7 @@
-using FireCommandApi.Services.Interfaces;
 using FireCommandModels.Models;
 using FireCommandModels.Models.ViewModels;
 using FireCommandModels.Repositories.Interfaces;
+using FireCommandModels.Services.Interfaces;
 
 namespace FireCommandApi.Services
 {
@@ -14,7 +14,7 @@ namespace FireCommandApi.Services
             this.communicationRepository = communicationRepository;
         }
 
-        public async Task<CommunicationViewModel> GetCommunicationsAsync()
+        public async Task<CommunicationViewModel> GetCommunicationsInfoAsync()
         {
             List<Channel> channels = await this.communicationRepository.GetChannelsAsync();
             List<Message> messages = await this.communicationRepository.GetMessagesAsync();

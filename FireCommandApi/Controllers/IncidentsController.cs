@@ -1,6 +1,6 @@
 ﻿using FireCommandModels.Models;
 using FireCommandModels.Models.ViewModels;
-using FireCommandApi.Services.Interfaces;
+using FireCommandModels.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FireCommandApi.Controllers
@@ -17,14 +17,14 @@ namespace FireCommandApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IncidentViewModel>> GetIncidents()
+        public async Task<ActionResult<IncidentViewModel>> GetIncidentsInfo()
         {
-            IncidentViewModel viewModel = await this.incidentService.GetIncidentOverviewAsync();
+            IncidentViewModel viewModel = await this.incidentService.GetIncidentsInfoAsync();
             return viewModel;
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateIncident(Incident incident)
+        public async Task<ActionResult> AddIncident(Incident incident)
         {
             await this.incidentService.AddIncidentAsync(incident);
             return Ok();

@@ -1,6 +1,6 @@
-﻿using FireCommandApi.Services.Interfaces;
-using FireCommandModels.Models;
+﻿using FireCommandModels.Models;
 using FireCommandModels.Models.ViewModels;
+using FireCommandModels.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FireCommandApi.Controllers
@@ -17,9 +17,9 @@ namespace FireCommandApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<CommunicationViewModel>> GetCommunications()
+        public async Task<ActionResult<CommunicationViewModel>> GetCommunicationsInfoAsync()
         {
-            CommunicationViewModel viewModel = await this.communicationService.GetCommunicationsAsync();
+            CommunicationViewModel viewModel = await this.communicationService.GetCommunicationsInfoAsync();
             return viewModel;
         }
 

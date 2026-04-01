@@ -1,6 +1,6 @@
 ﻿using FireCommandModels.Models;
 using FireCommandModels.Models.ViewModels;
-using FireCommandApi.Services.Interfaces;
+using FireCommandModels.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FireCommandApi.Controllers
@@ -17,9 +17,9 @@ namespace FireCommandApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<EquipmentViewModel>> GetEquipment()
+        public async Task<ActionResult<EquipmentViewModel>> GetEquipmentInfoAsync()
         {
-            EquipmentViewModel viewModel = await this.equipmentService.GetEquipmentOverviewAsync();
+            EquipmentViewModel viewModel = await this.equipmentService.GetEquipmentInfoAsync();
             return viewModel;
         }
 

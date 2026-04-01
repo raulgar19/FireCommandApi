@@ -1,21 +1,35 @@
-using FireCommandApi.Services.Interfaces;
 using FireCommandModels.Models;
+using FireCommandModels.Models.ViewModels;
 using FireCommandModels.Repositories.Interfaces;
+using FireCommandModels.Services.Interfaces;
 
 namespace FireCommandApi.Services
 {
     public class RiskZoneService : IRiskZoneService
     {
-        private readonly IRiskZoneRepository riskZoneRepository;
+        private IRiskZoneRepository riskZoneRepository;
+        private IIncidentRepository incidentRepository;
 
-        public RiskZoneService(IRiskZoneRepository riskZoneRepository)
+        public RiskZoneService(IRiskZoneRepository riskZoneRepository, IIncidentRepository incidentRepository)
         {
             this.riskZoneRepository = riskZoneRepository;
+            this.incidentRepository = incidentRepository;
         }
 
-        public Task<List<RiskZone>> GetRiskZonesAsync()
+        public async Task<RiskZoneViewModel> GetRiskZonesInfoAsync()
         {
-            return this.riskZoneRepository.GetRiskZonesAsync();
+            List<RiskZone> riskZones = await this.riskZoneRepository.GetRiskZonesAsync();
+            List<Priority> priorioties = await this.incidentRepository.GetPrioritiesAsync();
+            List<RiskType> riskTypes = await this.riskZoneRepository.GetRiskTypesAsync();
+            List<Station> stations = await this.riskZoneRepository.GetStationsAsync();
+
+            return new RiskZoneViewModel
+            {
+                RiskZones = riskZones,
+                Priorioties = priorioties,
+                RiskTypes = riskTypes,
+                Stations = stations
+            };
         }
 
         public Task AddRiskZoneAsync(RiskZone riskZone)

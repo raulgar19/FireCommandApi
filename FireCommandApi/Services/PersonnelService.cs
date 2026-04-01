@@ -1,6 +1,7 @@
-using FireCommandApi.Services.Interfaces;
 using FireCommandModels.Models;
+using FireCommandModels.Models.ViewModels;
 using FireCommandModels.Repositories.Interfaces;
+using FireCommandModels.Services.Interfaces;
 
 namespace FireCommandApi.Services
 {
@@ -13,9 +14,22 @@ namespace FireCommandApi.Services
             this.personnelRepository = personnelRepository;
         }
 
-        public Task<List<Personnel>> GetPersonnelAsync()
+        public async Task<PersonnelViewModel> GetPersonnelInfoAsync()
         {
-            return this.personnelRepository.GetPersonnelAsync();
+            List<Personnel> personnel = await this.personnelRepository.GetPersonnelAsync();
+            List<Rank> ranks = await this.personnelRepository.GetRanksAsync();
+            List<Specialization> specializations = await this.personnelRepository.GetSpecializationsAsync();
+            List<Station> stations = await this.personnelRepository.GetStationsAsync();
+            List<PersonnelStatus> personnelStatuses = await this.personnelRepository.GetPersonnelStatusesAsync();
+
+            return new PersonnelViewModel
+            {
+                Personnel = personnel,
+                Ranks = ranks,
+                Specializations = specializations,
+                Stations = stations,
+                PersonnelStatuses = personnelStatuses
+            };
         }
 
         public Task AddPersonnelAsync(Personnel personnel)
