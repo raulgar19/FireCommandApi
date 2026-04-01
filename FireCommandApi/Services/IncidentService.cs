@@ -40,21 +40,6 @@ namespace FireCommandApi.Services
             };
         }
 
-        public Task<List<Incident>> GetIncidentsAsync()
-        {
-            return this.incidentRepository.GetIncidentsAsync();
-        }
-
-        public Task<List<Priority>> GetPrioritiesAsync()
-        {
-            return this.incidentRepository.GetPrioritiesAsync();
-        }
-
-        public Task<List<IncidentType>> GetIncidentTypesAsync()
-        {
-            return this.incidentRepository.GetIncidentTypesAsync();
-        }
-
         public Task AddIncidentAsync(Incident incident)
         {
             return this.incidentRepository.AddIncidentAsync(incident);
@@ -75,11 +60,6 @@ namespace FireCommandApi.Services
             }
 
             await this.incidentRepository.DeleteIncidentAsync(incident);
-        }
-
-        public Task<IncidentViewModel> GetIncidentAsync()
-        {
-            throw new NotImplementedException();
         }
     }
 }
